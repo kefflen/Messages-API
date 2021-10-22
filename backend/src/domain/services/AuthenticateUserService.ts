@@ -1,7 +1,7 @@
 
 class AuthenticateUserService {
   async execute(code: string) {
-
+    return ''
   }
 }
 

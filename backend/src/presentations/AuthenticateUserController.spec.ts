@@ -4,9 +4,11 @@ import { AppError } from '../domain/errors/appError'
 
 function makeAuthenticateUserServiceSpy() {
   class AuthenticateUserServiceSpy {
+    result: string|undefined
     code: string|undefined
     async execute(code: string) {
       this.code = code
+      return this.result
     }
   }
 
@@ -76,6 +78,17 @@ describe("tests that should return a good response", () => {
     const httpResponse = await sut.handle(httpRequest)
 
     expect(httpResponse.statusCode).toBe(200)
+  })
+
+  it('if everything is alright. Should return on body the result of AthenticateUserService.execute', async () => {
+    const { sut, authenticateUserServiceSpy } = makeSut()
+    const result = 'valid_result'
+    authenticateUserServiceSpy.result = result
+
+    const httpResponse = validHttpRequest()
+    const response = await sut.handle(httpResponse)
+
+    expect(response.body).toBe(result)
   })
 })
 

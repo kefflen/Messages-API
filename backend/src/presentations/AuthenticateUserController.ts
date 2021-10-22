@@ -13,15 +13,16 @@ class AuthenticateUserController {
     if (!httpRequest.body.code) return new HttpResponse("any_error_message", 400)
 
     const { code } = httpRequest.body
+    let result
     try {
-      await this.authenticateUserService.execute(code)
+      result = await this.authenticateUserService.execute(code)
     } catch (error) {
       if (error instanceof AppError) {
         return new HttpResponse(error.message, error.statusCode)
       }
     }
-
-    return HttpResponse.ok("valid response")
+    
+    return HttpResponse.ok(result)
   }
 }
 
