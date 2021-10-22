@@ -1,11 +1,27 @@
 import { AuthenticateUserController } from "./AuthenticateUserController"
 import HttpResponse from "./models/HttpResponse"
 
-function makeSut() {
 
-  const sut = new AuthenticateUserController()
+function makeAuthenticateUserServiceSpy() {
+  class AuthenticateUserServiceSpy {
+    code: string|undefined
+    async execute(code: string) {
+      this.code = code
+    }
+  }
+
+  return new AuthenticateUserServiceSpy()
+}
+
+type Dependencies = {
+  authenticateUserService: any|undefined
+}
+
+function makeSut(injectDepedency={} as Dependencies) {
+  const authenticateUserServiceSpy = injectDepedency.authenticateUserService?? makeAuthenticateUserServiceSpy()
+  const sut = new AuthenticateUserController(authenticateUserServiceSpy)
   return {
-    sut
+    sut, authenticateUserServiceSpy
   }
 }
 
@@ -31,6 +47,19 @@ describe("AuthenticateUserController test cases that fails", () => {
     const response = await sut.handle(httpRequest)
     
     expect(response.statusCode).toBe(400)
+  })
+
+  it('The method execute of AuthenticateUserService should receive code as argument', async () => {
+    const { sut, authenticateUserServiceSpy } = makeSut()
+    const code = 'any_code'
+    const httpRequest = {
+      body: {
+        code
+      }
+    }
+
+    await sut.handle(httpRequest)
+    expect(authenticateUserServiceSpy.code).toBe(code)
   })
 })
 
