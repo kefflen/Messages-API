@@ -1,3 +1,3 @@
 export default interface HttpRequest {
-  body: object
+  body: any
 }

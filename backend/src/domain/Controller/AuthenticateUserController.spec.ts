@@ -9,7 +9,7 @@ function makeSut() {
   }
 }
 
-describe("AuthenticateUserController", () => {
+describe("AuthenticateUserController test cases that fails", () => {
   it('The method handle of instance AuthenticateUserController should return a httpResponse', async () => {
     const { sut } = makeSut()
     const httpRequest = {
@@ -31,5 +31,19 @@ describe("AuthenticateUserController", () => {
     const response = await sut.handle(httpRequest)
     
     expect(response.statusCode).toBe(400)
+  })
+})
+
+describe("tests that should return a good response", () => {
+  it('should return 200 if code is passed', async () => {
+    const { sut } = makeSut()
+    const httpRequest = {
+      body: {
+        code: 'any_code'
+      }
+    }
+    const httpResponse = await sut.handle(httpRequest)
+
+    expect(httpResponse.statusCode).toBe(200)
   })
 })
