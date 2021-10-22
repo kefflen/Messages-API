@@ -1,0 +1,18 @@
+{
+  "name": "messages-api",
+  "version": "1.0.0",
+  "description": "Projeto baseado no NLW Heat, mas com algumas alterações, como testes e clean architecture",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsnd src/server",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^27.3.1",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.4.4"
+  }
+}
