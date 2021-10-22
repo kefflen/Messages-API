@@ -16,8 +16,6 @@ class SpyMethodGetProfileFromGithub {
   }
 }
 
-
-
 describe('AuthenticateUserService tests', () => {
   it("Should give to getProfileFromGithub method the code received", async () => {
     const { sut, spyMethodGetProfileFromGithub } = makeSut()
