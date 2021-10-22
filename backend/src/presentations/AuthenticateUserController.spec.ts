@@ -1,6 +1,6 @@
 import { AuthenticateUserController } from "./AuthenticateUserController"
-import HttpResponse from "./models/HttpResponse"
-import { AppError } from '../errors/appError'
+import HttpResponse from "./helpters/HttpResponse"
+import { AppError } from '../domain/errors/appError'
 
 function makeAuthenticateUserServiceSpy() {
   class AuthenticateUserServiceSpy {

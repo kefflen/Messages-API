@@ -1,7 +1,7 @@
-import { AppError } from "../errors/appError"
-import { AuthenticateUserService } from "../services"
-import HttpRequest from "./models/HttpRequest"
-import HttpResponse from "./models/HttpResponse"
+import { AppError } from "../domain/errors/appError"
+import { AuthenticateUserService } from "../domain/services"
+import HttpRequest from "./helpters/HttpRequest"
+import HttpResponse from "./helpters/HttpResponse"
 
 
 class AuthenticateUserController {
