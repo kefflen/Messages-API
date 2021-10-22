@@ -1,13 +1,8 @@
-import { User } from "../entities/User";
+import { User, IUnregisteredUser } from '../entities'
 
 interface IUserRepository {
-  createUser(
-    name: string, github_id: string,
-    avatarUrl: string, login: string
-  ): Promise<User>
-
-  findById(id: string): Promise<User>
-  update(user: User): Promise<User>
+  createUser(unregisteredUser: IUnregisteredUser): Promise<User>
+  findById(id: number): Promise<User>
 }
 
 export {

@@ -1,10 +1,10 @@
 class User {
   constructor(
-    private id: string,
-    private name: string,
-    private githubId: number,
-    private avatarUrl: string,
-    private login: string,
+    public id: string,
+    public name: string,
+    public github_id: number,
+    public avatar_url: string,
+    public login: string,
   ) {}
 }
 
