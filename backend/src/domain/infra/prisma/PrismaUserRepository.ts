@@ -10,11 +10,26 @@ class PrismaUserRepository implements IUserRepository {
     return this.convertToEntitieUser(user)
   }
 
-  async findById(id: number) {
+  async findById(id: string) {
+    const user = await prismaClient.user.findFirst({
+      where: { id }
+    })
+    if (user) {
+      return null
+    } else {
+      return this.convertToEntitieUser(user)
+    }
+  }
+
+  async findByGithubId(id: number) {
     const user = await prismaClient.user.findFirst({
       where: {github_id: id}
     })
-    return this.convertToEntitieUser(user)
+    if (user) {
+      return null
+    } else {
+      return this.convertToEntitieUser(user)
+    }
   }
 
   convertToEntitieUser(user: any) {
