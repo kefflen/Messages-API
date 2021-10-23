@@ -1,10 +1,11 @@
 import { AppError } from "../domain/errors/appError"
 import { AuthenticateUserService } from "../domain/services"
+import { IController } from "./contract/IController"
 import HttpRequest from "./helpters/HttpRequest"
 import HttpResponse from "./helpters/HttpResponse"
 
 
-class AuthenticateUserController {
+class AuthenticateUserController implements IController {
   constructor(
     private authenticateUserService: AuthenticateUserService
   ) {}
