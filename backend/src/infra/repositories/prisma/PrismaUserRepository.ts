@@ -1,5 +1,5 @@
-import { IUnregisteredUser, User } from "../../domain/entities"
-import { IUserRepository } from "../../domain/repositories/IUserRepository"
+import { IUnregisteredUser, User } from "../../../domain/entities"
+import { IUserRepository } from "../../../domain/repositories/IUserRepository"
 import prismaClient from "./prismaClient";
 
 class PrismaUserRepository implements IUserRepository {

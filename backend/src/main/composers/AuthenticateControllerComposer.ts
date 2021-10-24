@@ -1,4 +1,4 @@
-import { PrismaUserRepository } from "../../infra/prisma/PrismaUserRepository";
+import { PrismaUserRepository } from "../../infra/repositories/prisma/PrismaUserRepository";
 import { IUserRepository } from "../../domain/repositories/IUserRepository";
 import { AuthenticateUserService } from "../../domain/services";
 import { Controller } from "../../presentations/contract/Controller";
