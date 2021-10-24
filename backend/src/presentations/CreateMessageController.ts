@@ -1,8 +1,8 @@
 import { AppError } from "../domain/errors/appError";
 import { CreateMessageService } from "../domain/services/CreateMessageService";
 import { IController } from "./contract/IController";
-import HttpRequest from "./helpters/HttpRequest";
-import HttpResponse from "./helpters/HttpResponse";
+import HttpRequest from "./helpers/HttpRequest";
+import HttpResponse from "./helpers/HttpResponse";
 
 class CreateMessageController implements IController{
   constructor(

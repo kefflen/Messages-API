@@ -1,5 +1,5 @@
-import HttpRequest from "../helpters/HttpRequest";
-import HttpResponse from "../helpters/HttpResponse";
+import HttpRequest from "../helpers/HttpRequest";
+import HttpResponse from "../helpers/HttpResponse";
 
 interface IController {
   handle(httpRequest: HttpRequest): Promise<HttpResponse>

@@ -3,7 +3,7 @@ import { IUserRepository } from "../../domain/repositories/IUserRepository";
 import { AuthenticateUserService } from "../../domain/services";
 import { IController } from "../../presentations/contract/IController";
 import { AuthenticateUserController } from '../../presentations/AuthenticateUserController'
-import HttpRequest from "../../presentations/helpters/HttpRequest";
+import HttpRequest from "../../presentations/helpers/HttpRequest";
 
 export default class AuthenticateControllerComposer implements IController {
   private authenticateUserController: IController
