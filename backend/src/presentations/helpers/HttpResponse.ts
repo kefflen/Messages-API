@@ -24,7 +24,7 @@ export default class HttpResponse {
   static error(body:any, statusCode: number, error=null) {
     return new this({
         error: body,
-        statuCode: statusCode
+        statusCode
       }, statusCode, error)
   }
   

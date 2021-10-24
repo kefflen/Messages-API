@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { Controller } from "../presentations/contract/Controller";
+import { Controller } from "../../presentations/contract/Controller";
 
 class RouterExpressAdapter {
   constructor(

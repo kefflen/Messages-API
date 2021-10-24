@@ -1,6 +1,6 @@
 import {Router} from 'express'
 import AuthenticateControllerComposer from '../composers/AuthenticateControllerComposer'
-import { RouterExpressAdapter } from '../adapter'
+import { RouterExpressAdapter } from '../adapters/adapter'
 
 const userRouter = Router()
 
