@@ -3,10 +3,8 @@ import { Controller } from "../../presentations/contract/Controller";
 
 class RouterExpressAdapter {
   constructor(
-    private readonly controller: Controller
-  ) {
-    
-  }
+    protected readonly controller: Controller
+  ) {}
 
   handle = async (request: Request, response: Response) => {
     const httpRequest = {

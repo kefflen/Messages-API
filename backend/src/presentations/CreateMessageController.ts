@@ -1,17 +1,21 @@
 import { AppError } from "../domain/errors/appError";
 import { CreateMessageService } from "../domain/services/CreateMessageService";
-import { IController } from "./contract/Controller";
+import { Controller } from "./contract/Controller";
 import HttpRequest from "./helpers/HttpRequest";
 import HttpResponse from "./helpers/HttpResponse";
 
-class CreateMessageController implements IController{
+class CreateMessageController extends Controller{
+  private readonly createMessageService
   constructor(
-    private readonly createMessageService: CreateMessageService
-  ) {}
+    createMessageService: CreateMessageService
+  ) {
+    super()
+    this.createMessageService = createMessageService
+  }
 
-  async handle(httpRequest: HttpRequest) {
+  async execute(httpRequest: HttpRequest) {
     if (!httpRequest.body.text) return HttpResponse.badRequest("Need to pass a text to request body")
-    if (!httpRequest.body.userId) return HttpResponse.serverError("Need user id to create message")
+    if (!httpRequest.body.userId) return HttpResponse.badRequest("Need user id to create message")
     const { text, userId} = httpRequest.body
     
     let message
@@ -21,7 +25,7 @@ class CreateMessageController implements IController{
       if (error instanceof AppError) {
         return new HttpResponse(error.message, error.statusCode)
       } else {
-        return HttpResponse.serverError('Unknown error: Not able to authenticate user')
+        return HttpResponse.serverError('Unknown error: Not able to authenticate user', error)
       }
     }
 
