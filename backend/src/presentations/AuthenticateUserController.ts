@@ -11,7 +11,7 @@ class AuthenticateUserController implements IController {
   ) {}
 
   async handle(httpRequest: HttpRequest) {
-    if (!httpRequest.body.code) return new HttpResponse("any_error_message", 400)
+    if (!httpRequest.body.code) return HttpResponse.badRequest('Need to pass code to request')
 
     const { code } = httpRequest.body
     let result
@@ -20,6 +20,8 @@ class AuthenticateUserController implements IController {
     } catch (error) {
       if (error instanceof AppError) {
         return new HttpResponse(error.message, error.statusCode)
+      } else {
+        return HttpResponse.serverError('Unknown error: Not able to authenticate user')
       }
     }
     
