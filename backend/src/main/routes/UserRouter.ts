@@ -4,7 +4,7 @@ import { RouterExpressAdapter } from '../adapter'
 
 const userRouter = Router()
 
-userRouter.get('', RouterExpressAdapter.adapt(new AuthenticateControllerComposer()))
+userRouter.get('', new RouterExpressAdapter(new AuthenticateControllerComposer()).handle)
 
 export {
   userRouter
