@@ -1,4 +1,5 @@
 import { IEventObserver } from "../contracts";
+import { AppError } from "../errors/appError";
 import { IMessageRepository } from "../repositories/IMessageRepository";
 
 class CreateMessageService {
@@ -7,7 +8,14 @@ class CreateMessageService {
     private readonly messageRepository: IMessageRepository
   ) {}
   async execute(text: string, userId: string) {
-    const message = await this.messageRepository.createMessage(text, userId)
+    if (!text.trim()) throw new AppError("Message can´t be a bland value", 400)
+
+    let message
+    try {
+      message = await this.messageRepository.createMessage(text, userId)
+    } catch(error) {
+      throw new AppError("Unable to create a message in repository", 500)
+    }
     
     const dataToObserver = {
       text: message.text,
@@ -18,7 +26,7 @@ class CreateMessageService {
         avatar_url: message.user.avatar_url
       }
     }
-
+    
     this.eventObserver.emit("new_message", dataToObserver)
 
     return message
