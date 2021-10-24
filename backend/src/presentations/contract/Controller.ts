@@ -2,7 +2,7 @@ import { AppError } from "../../domain/errors/appError";
 import HttpRequest from "../helpers/HttpRequest";
 import HttpResponse from "../helpers/HttpResponse";
 
-class Controller {
+abstract class Controller {
   constructor() {}
 
   readonly handle = async (httpRequest: HttpRequest): Promise<HttpResponse> => {
@@ -17,9 +17,7 @@ class Controller {
     }
   }
 
-  async execute(httpRequest: HttpRequest): Promise<HttpResponse>{
-    throw new Error("Not implemented")
-  }
+  abstract execute(httpRequest: HttpRequest): Promise<HttpResponse>
 }
 
 export {
