@@ -1,30 +1,22 @@
-import { AppError } from "../domain/errors/appError"
 import { AuthenticateUserService } from "../domain/services"
-import { IController } from "./contract/IController"
+import { Controller } from "./contract/Controller"
 import HttpRequest from "./helpers/HttpRequest"
 import HttpResponse from "./helpers/HttpResponse"
 
 
-class AuthenticateUserController implements IController {
+class AuthenticateUserController extends Controller {
+  authenticateUserService: AuthenticateUserService
   constructor(
-    private authenticateUserService: AuthenticateUserService
-  ) {}
+    authenticateUserService: AuthenticateUserService
+  ) {
+    super()
+    this.authenticateUserService = authenticateUserService
+  }
 
-  async handle(httpRequest: HttpRequest) {
+  async execute(httpRequest: HttpRequest) {
     if (!httpRequest.body.code) return HttpResponse.badRequest('Need to pass code to request')
-
     const { code } = httpRequest.body
-    let result
-    try {
-      result = await this.authenticateUserService.execute(code)
-    } catch (error) {
-      if (error instanceof AppError) {
-        return new HttpResponse(error.message, error.statusCode)
-      } else {
-        return HttpResponse.serverError('Unknown error: Not able to authenticate user')
-      }
-    }
-    
+    const result = await this.authenticateUserService.execute(code)
     return HttpResponse.ok(result)
   }
 }

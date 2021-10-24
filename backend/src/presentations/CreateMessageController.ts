@@ -1,6 +1,6 @@
 import { AppError } from "../domain/errors/appError";
 import { CreateMessageService } from "../domain/services/CreateMessageService";
-import { IController } from "./contract/IController";
+import { IController } from "./contract/Controller";
 import HttpRequest from "./helpers/HttpRequest";
 import HttpResponse from "./helpers/HttpResponse";
 

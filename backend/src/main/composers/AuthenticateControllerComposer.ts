@@ -1,22 +1,23 @@
 import { PrismaUserRepository } from "../../infra/prisma/PrismaUserRepository";
 import { IUserRepository } from "../../domain/repositories/IUserRepository";
 import { AuthenticateUserService } from "../../domain/services";
-import { IController } from "../../presentations/contract/IController";
+import { Controller } from "../../presentations/contract/Controller";
 import { AuthenticateUserController } from '../../presentations/AuthenticateUserController'
 import HttpRequest from "../../presentations/helpers/HttpRequest";
 
-export default class AuthenticateControllerComposer implements IController {
-  private authenticateUserController: IController
+export default class AuthenticateControllerComposer extends Controller {
+  private authenticateUserController: Controller
   private userRepository: IUserRepository
   private authenticateUserService: AuthenticateUserService
 
   constructor() {
+    super()
     this.userRepository = new PrismaUserRepository()
     this.authenticateUserService = new AuthenticateUserService(this.userRepository)
     this.authenticateUserController = new AuthenticateUserController(this.authenticateUserService)
   }
 
-  async handle(httpRequest: HttpRequest) {
-    return this.authenticateUserController.handle(httpRequest)
+  async execute(httpRequest: HttpRequest) {
+    return await this.authenticateUserController.handle(httpRequest)
   }
 }

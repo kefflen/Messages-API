@@ -1,19 +1,19 @@
 import { Request, Response } from "express";
-import { IController } from "../presentations/contract/IController";
+import { Controller } from "../presentations/contract/Controller";
 
 class RouterExpressAdapter {
   constructor(
-    private readonly controller: IController
-  ) {}
+    private readonly controller: Controller
+  ) {
+    
+  }
 
-  handle() {
-    return async (request: Request, response: Response) => {
-      const httpRequest = {
-        body: request.body
-      }
-      const httpResponse = await this.controller.handle(httpRequest)
-      return response.status(httpResponse.statusCode).json(httpResponse.body)
+  handle = async (request: Request, response: Response) => {
+    const httpRequest = {
+      body: request.body
     }
+    const httpResponse = await this.controller.handle(httpRequest)
+    return response.status(httpResponse.statusCode).json(httpResponse.body)
   }
 }
 

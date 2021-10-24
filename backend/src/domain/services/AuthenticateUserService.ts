@@ -16,7 +16,7 @@ class AuthenticateUserService {
   constructor(
     private userRepository: IUserRepository
   ){}
-
+  
   async execute(code: string) {
     const token = await this.getTokenFromGithub(code)
     const profile = await this.getProfileFromGithub(token)

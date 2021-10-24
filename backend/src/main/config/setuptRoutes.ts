@@ -3,5 +3,5 @@ import { userRouter } from "../routes"
 
 
 export default (app: Express) => {
-  app.use(userRouter)
+  app.use('/user', userRouter)
 }
