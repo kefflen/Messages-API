@@ -1,3 +1,5 @@
+import { UserPayload } from "./UserPayload";
+
 export default interface HttpRequest {
-  body: any
+  body: any, user?: UserPayload
 }

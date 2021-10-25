@@ -21,6 +21,10 @@ export default class HttpResponse {
     return this.error(body, 500, error)
   }
 
+  static unauthorized(message: string) {
+    return this.error(message, 401)
+  }
+
   static error(body:any, statusCode: number, error=null) {
     return new this({
         error: body,

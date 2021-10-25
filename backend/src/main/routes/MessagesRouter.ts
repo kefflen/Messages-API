@@ -1,7 +1,12 @@
 import { Router } from 'express'
 import { RouterExpressAdapter } from '../adapters/RouterExpressAdapter'
+import { RouterExpressAdapterLogged } from '../adapters/RouterExpressAdapterLoged'
 import { CreateMessageControllerComposer } from '../composers/CreateMessageControllerComposer'
 
-const router = Router()
+const messageRouter = Router()
 
-router.post('messages', new RouterExpressAdapter(new CreateMessageControllerComposer()).handle)
+messageRouter.post('', new RouterExpressAdapterLogged(new CreateMessageControllerComposer()).handle)
+
+export {
+  messageRouter
+}
