@@ -1,4 +1,5 @@
 import axios from "axios"
+import { IJwtGenerator } from "../contracts/IJwtGenerator"
 import { AppError } from "../errors/appError"
 import { IUserRepository } from "../repositories/IUserRepository"
 interface IAccessTokenReponse {
@@ -14,27 +15,31 @@ interface IUserGithubResponse {
 
 class AuthenticateUserService {
   constructor(
-    private userRepository: IUserRepository
+    private userRepository: IUserRepository,
+    private jwtGenerator: IJwtGenerator
   ){}
   
   async execute(code: string) {
     const token = await this.getTokenFromGithub(code)
     const profile = await this.getProfileFromGithub(token)
     
-    let user
-    const existUser = !!(await this.userRepository.findByGithubId(profile.id))
-    if (existUser) {
+    let user = await this.userRepository.findByGithubId(profile.id)
+    if (!user) {
       user = await this.userRepository.createUser({
         name: profile.name,
         github_id: profile.id,
         avatar_url: profile.avatar_url,
         login: profile.login
       })
-    } else {
-      user = await this.userRepository.findByGithubId(profile.id)
-    }
+    } 
 
-    return user
+    const secret = process.env.SECRET
+    if (!secret) throw new AppError("Internal error: Need secret password to generate jwt token", 500)
+    const jwtToken = await this.jwtGenerator.sign({
+      name: user.name, id: user.id
+    }, secret)
+
+    return {user, token: jwtToken}
   }
 
   async getTokenFromGithub(code: string) {

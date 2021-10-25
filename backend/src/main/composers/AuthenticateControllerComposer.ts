@@ -4,6 +4,7 @@ import { AuthenticateUserService } from "../../domain/services";
 import { Controller } from "../../presentations/contract/Controller";
 import { AuthenticateUserController } from '../../presentations/AuthenticateUserController'
 import HttpRequest from "../../presentations/helpers/HttpRequest";
+import { JwtGenerator } from "../../utils/jwtGenerator";
 
 export default class AuthenticateControllerComposer extends Controller {
   private authenticateUserController: Controller
@@ -13,7 +14,7 @@ export default class AuthenticateControllerComposer extends Controller {
   constructor() {
     super()
     this.userRepository = new PrismaUserRepository()
-    this.authenticateUserService = new AuthenticateUserService(this.userRepository)
+    this.authenticateUserService = new AuthenticateUserService(this.userRepository, new JwtGenerator())
     this.authenticateUserController = new AuthenticateUserController(this.authenticateUserService)
   }
 
