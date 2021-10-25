@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { RouterExpressAdapter } from '../adapters/RouterExpressAdapter'
-import { RouterExpressAdapterLogged } from '../adapters/RouterExpressAdapterLoged'
+import { RouterExpressAdapterLogged } from '../adapters/RouterExpressAdapterLogged'
 import { CreateMessageControllerComposer } from '../composers/CreateMessageControllerComposer'
 
 const messageRouter = Router()
