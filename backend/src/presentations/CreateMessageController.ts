@@ -15,10 +15,13 @@ class CreateMessageController extends Controller{
 
   async execute(httpRequest: HttpRequest) {
     if (!httpRequest.body.text) return HttpResponse.badRequest("Need to pass a text to request body")
-    if (!httpRequest.body.userId) return HttpResponse.badRequest("Need user id to create message")
-    const { text, userId} = httpRequest.body
+    if (!httpRequest.user) return HttpResponse.badRequest("Need user id to create message")
+    const { text } = httpRequest.body
+
+    const { id: userId} = httpRequest.user
     
     let message
+
     try {
       message = await this.createMessageService.execute(text, userId)
     } catch(error) {

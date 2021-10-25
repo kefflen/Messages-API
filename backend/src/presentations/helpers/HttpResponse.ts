@@ -7,7 +7,7 @@ export default class HttpResponse {
     this.#statusCode = statusCode
     this.#body = body
     this.#error = error
-    if (process.env.mode === 'dev') console.log(error)
+    if (process.env.mode === 'dev' && this.#error) console.log(error)
   }
 
   static ok(body: any) {
