@@ -1,1 +1,0 @@
-Projeto baseado no NLW Heat, mas com algumas alterações, como testes e clean architecture
