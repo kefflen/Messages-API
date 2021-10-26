@@ -9,7 +9,6 @@ Nesse projeto foi implementado
   Design patterns:
     Composer
     Adapter
-
     Planejo adicionar um abstract factory ou um simples factory
     
   API com express
