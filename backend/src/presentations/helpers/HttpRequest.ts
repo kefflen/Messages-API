@@ -1,5 +1,5 @@
 import { UserPayload } from "./UserPayload";
 
 export default interface HttpRequest {
-  body: any, user?: UserPayload
+  body: any, user?: UserPayload, params?:any
 }

@@ -8,7 +8,7 @@ class RouterExpressAdapter {
 
   handle = async (request: Request, response: Response) => {
     const httpRequest = {
-      body: request.body
+      body: request.body, params: request.params
     }
     const httpResponse = await this.controller.handle(httpRequest)
     return response.status(httpResponse.statusCode).json(httpResponse.body)

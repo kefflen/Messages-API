@@ -14,7 +14,7 @@ class RouterExpressAdapterLogged extends RouterExpressAdapter {
       return response.status(httpResponse.statusCode).json(httpResponse.body)
     }
     const httpRequest = {
-      body: request.body, user: payload
+      body: request.body, user: payload, params: request.params
     }
     const httpResponse = await this.controller.handle(httpRequest)
     return response.status(httpResponse.statusCode).json(httpResponse.body)
